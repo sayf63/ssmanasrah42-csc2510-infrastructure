@@ -1,33 +1,6 @@
 ---
 - hosts: all 
   become: yes  
-  tasks:
-    - name: Update APT
-      ansible.builtin.apt:
-        update_cache: true
-    - name: Install python-apt
-      ansible.builtin.package:
-       name: python-apt
-       state: latest
-    - name: Install apache2
-      ansible.builtin.package:
-       name: apache2
-       state: latest
-    - name: Copy file with owner and permissions
-      ansible.builtin.copy:
-       src: /ssmanasrah42-csc2510-infrastructure/files/config/apache2.conf
-       dest: /files/config/foo.conf
-       owner: sayf6
-       group: sayf6
-       mode: '0644'
-    - name: Copy file with owner and permissions
-      ansible.builtin.copy:
-       src: /ssmanasrah42-csc2510-infrastructure/site/index.html
-       dest: /files/config/index.html
-       owner: sayf6
-       group: sayf6
-       mode: '0644'
-    - name: Restart service httpd, in all cases
-      ansible.builtin.service:
-       name: httpd
-       state: restarted
+  roles:
+   - update-apt
+   - apache 2
